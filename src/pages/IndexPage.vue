@@ -3,28 +3,21 @@ import { reactive, ref } from "vue";
 import { AgGridVue } from "ag-grid-vue3";
 import { useRouter } from "vue-router";
 import DbData from "../../db.json";
-import "ag-grid-charts-enterprise";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 
 const router = useRouter();
 
-// Column Definitions: Defines the columns to be displayed.
-const CustomHeaderButton = {
-  template: `
-    <div style="display: flex; align-items: center;">
-      <span>{{ params.displayName }}</span>
-      <button @click.stop.prevent="handleClick"  style="margin-left: 5px; ">Click Me</button>
-    </div>
-  `,
-  methods: {
-    handleClick() {
-      console.log("Button clicked!");
-    },
-  },
-};
+// const CustomHeaderButton = {
+//   template: `
+//     <div style="display: flex; align-items: center;">
+//       <span>{{ params.displayName }}</span>
+//       <button @click.stop.prevent="handleClick"  style="margin-left: 5px; ">Click Me</button>
+//     </div>
+//   `,
+// };
 const colDefsMedalsIncluded = [
-  { field: "company_name", minWidth: 170 },
+  { field: "company_name", minWidth: 170, headerName: "Company Name" },
   { field: "stock_symbol" },
   { field: "average_eos_growth" },
   { field: "number_of_EPS_increases_last_20_years" },
@@ -59,15 +52,10 @@ const colDefsMedalsExcluded = [
   },
   {
     field: "payout_ratio",
-    headerComponentParams: CustomHeaderButton,
+    // headerComponentParams: CustomHeaderButton,
   },
   {
     field: "long_term_debt_equity_ratio",
-    columnChooserParams: {
-      suppressColumnFilter: true,
-      suppressColumnSelectAll: true,
-      suppressColumnExpandAll: true,
-    },
   },
   { field: "annual_forward_dividend_vs_previous_year" },
   {
@@ -82,10 +70,6 @@ const state = reactive({
   columnDefs: colDefsMedalsIncluded,
   defaultColDef: {
     flex: 1,
-    // columnChooserParams: {
-    //   // suppresses updating the layout of columns as they are rearranged in the grid
-    //   suppressSyncLayoutWithGrid: true,
-    // },
   },
   rowData: null,
   themeClass: "ag-theme-quartz",
@@ -103,8 +87,6 @@ const onBtIncludeMedalColumns = () => {
 const onGridReady = (params) => {
   gridApi.value = params.api;
   console.log(gridApi.value);
-  console.log(params.api);
-
   onBtIncludeMedalColumns();
   state.rowData = DbData.posts;
 };
