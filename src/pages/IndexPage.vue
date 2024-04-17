@@ -49,6 +49,8 @@ const state = reactive({
     initialWidth: 300,
     wrapHeaderText: true,
     autoHeaderHeight: true,
+    // alwaysShowHorizontalScroll: true,
+    // alwaysShowVerticalScroll: true,
   },
   rowData: null,
   themeClass: "ag-theme-quartz",
