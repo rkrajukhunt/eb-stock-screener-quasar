@@ -1,6 +1,7 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
+import DbData from "../../db.json";
 
-export const useCounterStore = defineStore('counter', {
+export const useCounterStore = defineStore("counter", {
   state: () => ({
     counter: 0,
   }),
@@ -9,7 +10,7 @@ export const useCounterStore = defineStore('counter', {
   },
   actions: {
     increment() {
-      this.counter++;
+      console.log(DbData);
     },
   },
 });
