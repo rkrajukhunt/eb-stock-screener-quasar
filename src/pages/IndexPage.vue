@@ -105,10 +105,8 @@ const onGridReady = (params) => {
   console.log(gridApi.value);
   console.log(params.api);
 
-  const updateData = () => {
-    onBtIncludeMedalColumns();
-    state.rowData = DbData;
-  };
+  onBtIncludeMedalColumns();
+  state.rowData = DbData.posts;
 };
 
 const onFilterTextBoxChanged = (e) => {
