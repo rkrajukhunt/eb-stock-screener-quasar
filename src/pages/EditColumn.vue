@@ -20,7 +20,7 @@ const onSaveColumns = async () => {
   <q-page class="flex flex-center bg-slate-100">
     <div class="shadow-xl rounded-3xl w-[90vw] bg-white pb-6">
       <div class="px-6 pt-6">
-        <h1 class="text-4xl font-medium mb-5">Stock scanner</h1>
+        <h1 class="text-4xl font-medium mb-5">Select Columns</h1>
       </div>
       <q-separator class="my-3" />
       <div class="flex justify-between mb-3 px-6">
