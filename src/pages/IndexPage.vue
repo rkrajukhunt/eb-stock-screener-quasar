@@ -1,9 +1,12 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { AgGridVue } from "ag-grid-vue3";
+import { useRouter } from "vue-router";
 import "ag-grid-charts-enterprise";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+
+const router = useRouter();
 
 // Column Definitions: Defines the columns to be displayed.
 const CustomHeaderButton = {
@@ -74,6 +77,7 @@ const colDefsMedalsExcluded = [
 ];
 
 const state = reactive({
+  filters: "",
   columnDefs: colDefsMedalsIncluded,
   defaultColDef: {
     flex: 1,
@@ -112,16 +116,21 @@ const onGridReady = (params) => {
     });
 };
 
-const onFilterTextBoxChanged = () => {
+const onFilterTextBoxChanged = (e) => {
   // gridApi.value.setGridOption(
   //   "quickFilterText",
   //   document.getElementById("filter-text-box").value
   // );
+  console.log(e);
   if (gridApi.value) {
-    gridApi.value.setQuickFilter(
-      document.getElementById("filter-text-box").value
-    );
+    gridApi.value.setQuickFilter(e);
   }
+};
+
+const onEditColumns = async () => {
+  await router.push({
+    name: "editColumns",
+  });
 };
 </script>
 
@@ -152,35 +161,50 @@ const onFilterTextBoxChanged = () => {
         </div>
       </div>
       <q-separator class="my-3" />
-      <div class="flex justify-end gap-3 mb-3 px-6">
+      <div class="flex justify-between mb-3 px-6">
+        <div>
+          <q-input
+            outlined
+            rounded
+            v-model="state.filters"
+            dense
+            label="Search"
+            @update:model-value="(e) => onFilterTextBoxChanged(e)"
+          >
+            <template v-slot:append>
+              <q-icon
+                v-if="state.filters !== ''"
+                name="close"
+                @click="state.filters = ''"
+                class="cursor-pointer"
+              />
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </div>
         <!-- <button
           class="py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75"
           v-on:click="onBtExcludeMedalColumns()"
         >
           Exclude Medal Columns
         </button> -->
-        <q-btn push color="primary" no-caps>
-          <p class="text-subtitle1 pl-1 text-sm">
-            <q-icon name="edit" size="18px"></q-icon> Edit Columns
-          </p>
-        </q-btn>
-        <q-btn push color="primary" no-caps>
-          <p class="text-subtitle1 pl-1 text-sm">
-            <q-icon name="system_update_alt" size="18px"></q-icon> Export
-          </p>
-        </q-btn>
+        <div class="flex justify-end gap-3">
+          <q-btn push color="primary" no-caps @click="onEditColumns">
+            <p class="text-subtitle1 pl-1 text-sm">
+              <q-icon name="edit" size="18px"></q-icon> Edit Columns
+            </p>
+          </q-btn>
+          <q-btn push color="primary" no-caps>
+            <p class="text-subtitle1 pl-1 text-sm">
+              <q-icon name="system_update_alt" size="18px"></q-icon> Export
+            </p>
+          </q-btn>
+        </div>
         <!-- <button v-on:click="onBtIncludeMedalColumns()">
           Include Medal Columns
         </button> -->
       </div>
       <div style="height: 500px; width: 90vw" class="">
-        <span>Quick Filter:</span>
-        <input
-          type="text"
-          id="filter-text-box"
-          placeholder="Filter..."
-          v-on:input="onFilterTextBoxChanged()"
-        />
         <ag-grid-vue
           :class="state.themeClass"
           style="width: 100%; height: 100%"
