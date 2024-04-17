@@ -4,11 +4,11 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [
       { path: "", component: () => import("pages/IndexPage.vue") },
-      // {
-      //   path: "/edit-columns",
-      //   name: "editColumns",
-      //   component: () => import("src/pages/EditColumn.vue"),
-      // },
+      {
+        path: "/edit-columns",
+        name: "editColumns",
+        component: () => import("src/pages/EditColumn.vue"),
+      },
     ],
   },
 
