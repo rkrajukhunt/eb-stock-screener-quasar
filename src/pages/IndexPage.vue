@@ -83,7 +83,7 @@ const onEditColumns = async () => {
   <q-page class="flex flex-center bg-slate-100 capitalize">
     <div class="shadow-xl rounded-3xl w-[90vw] bg-white pb-6">
       <div class="px-6 pt-6">
-        <h1 class="text-4xl font-medium mb-5">Stock scanner</h1>
+        <h1 class="text-4xl font-medium mb-5">Stock History</h1>
       </div>
       <q-separator class="my-3" />
       <div class="flex justify-between mb-3 px-6">
@@ -96,12 +96,12 @@ const onEditColumns = async () => {
             placeholder="Search"
           >
             <template v-slot:append>
-              <q-icon
-                v-if="state.filters !== ''"
+              <!-- <q-icon
+                v-if="state.search !== ''"
                 name="close"
-                @click="state.filters = ''"
+                @click="state.search = ''"
                 class="cursor-pointer"
-              />
+              /> -->
               <q-icon name="search" />
             </template>
           </q-input>
