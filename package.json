@@ -1,9 +1,9 @@
 {
-  "name": "simple-quasar-project",
+  "name": "eb-stock-screener-quasar",
   "version": "0.0.1",
-  "description": "A Quasar Project",
+  "description": "eb-stock-screener-quasar",
   "productName": "Quasar App",
-  "author": "tushar <tushar.pansuriya@emperorbrains.com>",
+  "author": "Raju Khunt",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
