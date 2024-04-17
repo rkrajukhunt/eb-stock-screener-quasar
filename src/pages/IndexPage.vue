@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 import { AgGridVue } from "ag-grid-vue3";
 import { useRouter } from "vue-router";
+import DbData from "../../db.json";
 import "ag-grid-charts-enterprise";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
@@ -104,16 +105,10 @@ const onGridReady = (params) => {
   console.log(gridApi.value);
   console.log(params.api);
 
-  const updateData = (data) => {
+  const updateData = () => {
     onBtIncludeMedalColumns();
-    state.rowData = data;
+    state.rowData = DbData;
   };
-
-  fetch("http://localhost:3000/posts")
-    .then((resp) => resp.json())
-    .then((data) => {
-      updateData(data);
-    });
 };
 
 const onFilterTextBoxChanged = (e) => {
@@ -128,37 +123,19 @@ const onFilterTextBoxChanged = (e) => {
 };
 
 const onEditColumns = async () => {
-  await router.push({
-    name: "editColumns",
-  });
+  // await router.push({
+  //   name: "editColumns",
+  // });
 };
 </script>
 
 <template>
   <q-page class="flex flex-center bg-slate-100">
     <div class="shadow-xl rounded-3xl w-[90vw] bg-white pb-6">
-      <div class="row px-6 pt-6">
-        <div class="col-6">
-          <h1 class="text-4xl font-medium mb-5">
-            Low on 10 year average earnings
-          </h1>
-          <p class="text-base mb-2">
-            Additionally, by using a 10-year average, investors can better
-            assess a company's ability to weather economic downturns and adapt
-            to changing market conditions, providing a more comprehensive
-            picture of its financial health and sustainability.
-          </p>
-          <p class="text-base">by <span class="font-medium">Pratyush</span></p>
-        </div>
-        <div class="col"></div>
-        <div class="col-3 text-end">
-          <q-btn push color="primary" no-caps>
-            <p class="text-subtitle1 pl-1 text-sm">
-              <q-icon name="notifications_active" size="18px"></q-icon> Get
-              Email Updates
-            </p>
-          </q-btn>
-        </div>
+      <div class="px-6 pt-6">
+        <h1 class="text-4xl font-medium mb-5">
+          Low on 10 year average earnings
+        </h1>
       </div>
       <q-separator class="my-3" />
       <div class="flex justify-between mb-3 px-6">

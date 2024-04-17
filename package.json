@@ -17,7 +17,6 @@
     "ag-grid-charts-enterprise": "^31.2.1",
     "ag-grid-vue3": "^31.2.1",
     "axios": "^1.2.1",
-    "json-server": "^1.0.0-alpha.23",
     "pinia": "^2.0.11",
     "quasar": "^2.8.0",
     "vue": "^3.4.18",
