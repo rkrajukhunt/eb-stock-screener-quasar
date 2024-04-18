@@ -1,22 +1,11 @@
 const routes = [
-  {
-    path: "/",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      { path: "", component: () => import("pages/IndexPage.vue") },
-      {
-        path: "/edit-columns",
-        name: "editColumns",
-        component: () => import("src/pages/EditColumn.vue"),
-      },
-    ],
-  },
-
+  { path: "/", component: () => import("../pages/HomeView.vue") },
+  { path: "/about", component: () => import("../pages/AboutView.vue") },
   // Always leave this as last one,
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
-    component: () => import("pages/ErrorNotFound.vue"),
+    component: () => import("../pages/NotFound.vue"),
   },
 ];
 
