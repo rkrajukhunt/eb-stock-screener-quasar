@@ -6,6 +6,7 @@ import Checkbox from "primevue/checkbox";
 import DbData from "../db.json";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import CustomFilter from "../components/CustomFilter.vue";
 
 import { useStockStore } from "../stores/stock";
 const stockStore = useStockStore();
@@ -22,6 +23,7 @@ const state = reactive({
     wrapHeaderText: true,
     autoHeaderHeight: true,
   },
+
   rowData: null,
   themeClass: "ag-theme-quartz",
 
@@ -41,15 +43,25 @@ onMounted(() => {
   const colData = stockStore.getFieldNameList.reduce((acc, obj) => {
     if (obj.isCheck) {
       const { isCheck, ...rest } = obj;
-      acc.push(rest);
+
+      // console.log(rest);
+      if (rest.field === "average_eos_growth") {
+        acc.push({ ...rest, filter: "[average_eos_growth] === 23" });
+      } else {
+        acc.push({ ...rest });
+      }
+
+      // ,
     }
     return acc;
   }, []);
 
+  console.log(gridApi.value);
   state.columnDefs = colData;
 });
 
 const onGridReady = (params) => {
+  console.log(params);
   gridApi.value = params.api;
   state.rowData = DbData.posts;
 };
@@ -70,6 +82,14 @@ const onFilter = (filterText) => {
       );
     });
   });
+};
+
+const getFilterModel = () => {
+  if (gridApi.value) {
+    const filterModel = gridApi.value.getFilterModel();
+    console.log("Filter Model:", filterModel);
+    return filterModel;
+  }
 };
 </script>
 
@@ -94,6 +114,7 @@ const onFilter = (filterText) => {
             </div>
             <div class="flex justify-end gap-3">
               <Button outlined>Edit Columns</Button>
+              <Button outlined @click="getFilterModel">Edidft Columns</Button>
             </div>
           </div>
           <div>
