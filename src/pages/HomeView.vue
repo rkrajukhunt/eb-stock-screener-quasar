@@ -34,12 +34,6 @@ const state = reactive({
 
 onMounted(() => {
   // edit page data
-  //   const checkedFields = data.reduce((acc, item) => {
-  //   if (item.isCheck) {
-  //     acc.push(item.field);
-  //   }
-  //   return acc;
-  // }, []);
 
   const colData = stockStore.getFieldNameList.reduce((acc, obj) => {
     if (obj.isCheck) {

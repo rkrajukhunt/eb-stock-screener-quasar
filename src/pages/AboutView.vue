@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import Checkbox from "primevue/checkbox";
 import { useStockStore } from "../stores/stock";
 import { useRouter } from "vue-router";
@@ -11,6 +11,24 @@ const state = reactive({
   columnList: stockStore.getFieldNameList,
   editColumnList: [],
 });
+
+onMounted(() => {
+  state.editColumnList = stockStore.getFieldNameList.reduce((acc, item) => {
+    if (item.isCheck) {
+      acc.push(item.field);
+    }
+    return acc;
+  }, []);
+});
+
+const onSaveColumns = async () => {
+  const newFilterList = stockStore.getFieldNameList.map((item) => ({
+    ...item,
+    isCheck: state.editColumnList.includes(item.field),
+  }));
+  stockStore.onSortField(newFilterList);
+  router.push("/");
+};
 </script>
 <template>
   <div class="px-6">
