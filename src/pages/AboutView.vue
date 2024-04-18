@@ -70,3 +70,6 @@ const onSaveColumns = async () => {
     </Card>
   </div>
 </template>
+
+<script setup>
+</script>

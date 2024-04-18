@@ -4,8 +4,10 @@ import { createPinia } from "pinia";
 
 import "./style.css";
 import App from "./App.vue";
+import MyPreset from "./mypreset/index.js";
 
 import PrimeVue from "primevue/config";
+import PrimeOne from 'primevue/themes/primeone';
 
 import Card from "primevue/card";
 import DataTable from "primevue/datatable";
@@ -18,7 +20,6 @@ import Checkbox from "primevue/checkbox";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
-import MyPreset from "./mypreset";
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -35,9 +36,17 @@ app.component("InputText", InputText);
 app.component("DataTable", DataTable);
 app.component("ColumnGroup", ColumnGroup);
 
+
 app.use(PrimeVue, {
-  unstyled: true,
-  pt: MyPreset,
+  theme: {
+    base: PrimeOne,
+    preset: MyPreset,
+    options: {
+      prefix: 'p',
+      darkModeSelector: 'system',
+      cssLayer: false
+    }
+  }
 });
 
 app.use(pinia);

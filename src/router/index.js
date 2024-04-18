@@ -7,6 +7,7 @@ export const router = createRouter({
       path: "/",
       component: () => import("../pages/HomeView.vue"),
     },
+    { path: "/dashboard", component: () => import("../pages/DashboardView.vue") },
     { path: "/about", component: () => import("../pages/AboutView.vue") },
     {
       path: "/:catchAll(.*)*",
