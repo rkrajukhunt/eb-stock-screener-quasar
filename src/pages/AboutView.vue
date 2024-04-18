@@ -1,5 +1,5 @@
 <template>
-    <div>
-        Welcome to about us
-    </div>
+  <div>
+    Welcome to about us
+  </div>
 </template>
