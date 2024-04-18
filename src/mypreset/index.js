@@ -1,5 +1,6 @@
 import {definePreset} from "primevue/themes";
-import Aura from "primevue/themes/primeone/aura/index.js";
+import {Aura} from "primevue/themes/primeone/presets/index.cjs.js";
+// import Aura from "primevue/themes/primeone/aura/index.js";
 
 const MyPreset = definePreset(Aura, {
     semantic: {
