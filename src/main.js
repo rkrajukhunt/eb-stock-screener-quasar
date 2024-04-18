@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import "./style.css";
 import AppRoot from "./App.vue";
 import { createPinia } from "pinia";
+import router from "./router";
 
 import { definePreset } from "primevue/themes";
 import PrimeVue from "primevue/config";
@@ -15,7 +16,6 @@ import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup";
 import Row from "primevue/row";
 import Dropdown from "primevue/dropdown";
-import router from "./router";
 
 const Noir = definePreset(Aura, {
   semantic: {
