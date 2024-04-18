@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <header class="bg-gray-900 shadow-lg">
+  <header class="bg-zinc-900 shadow-lg">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center py-4">
         <div>
