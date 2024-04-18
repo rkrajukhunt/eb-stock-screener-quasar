@@ -16,6 +16,9 @@ import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup";
 import Row from "primevue/row";
 import Dropdown from "primevue/dropdown";
+import InputText from "primevue/inputtext";
+import Divider from "primevue/divider";
+import Checkbox from "primevue/checkbox";
 
 const Noir = definePreset(Aura, {
   semantic: {
@@ -76,7 +79,7 @@ app.use(PrimeVue, {
   // Default theme configuration
   theme: {
     base: PrimeOne,
-    preset: Noir,
+    preset: Aura,
     options: {
       prefix: "p",
       darkModeSelector: "system",
@@ -92,6 +95,9 @@ app.component("Column", Column);
 app.component("ColumnGroup", ColumnGroup);
 app.component("Row", Row);
 app.component("Dropdown", Dropdown);
+app.component("InputText", InputText);
+app.component("Divider", Divider);
+app.component("Checkbox ", Checkbox);
 // prime vue config end
 
 app.mount("#app");
