@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -7,11 +7,14 @@ export const router = createRouter({
       path: "/",
       component: () => import("../pages/HomeView.vue"),
     },
-    { path: "/dashboard", component: () => import("../pages/DashboardView.vue") },
+    {
+      path: "/dashboard",
+      component: () => import("../pages/DashboardView.vue"),
+    },
     { path: "/about", component: () => import("../pages/AboutView.vue") },
     {
       path: "/:catchAll(.*)*",
       component: () => import("../pages/NotFound.vue"),
     },
-  ]
+  ],
 });

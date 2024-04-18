@@ -14,7 +14,8 @@
           <ul class="flex space-x-4">
             <!-- Navigation links -->
             <li>
-              <router-link to="/dashboard" class="text-gray-300 hover:text-white">Home</router-link></li>
+              <router-link to="/dashboard" class="text-gray-300 hover:text-white">Home</router-link>
+            </li>
             <li><router-link to="/about" class="text-gray-300 hover:text-white">About</router-link></li>
           </ul>
         </nav>
