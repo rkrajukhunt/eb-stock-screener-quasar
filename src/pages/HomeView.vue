@@ -1,15 +1,16 @@
 <script setup>
 import { reactive, ref, onMounted } from "vue";
 import { AgGridVue } from "ag-grid-vue3";
-// import { useRouter } from "vue-router";
-import Checkbox from "primevue/checkbox";
+import { useRouter } from "vue-router";
+
 import DbData from "../db.json";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
-import CustomFilter from "../components/CustomFilter.vue";
+// import CustomFilter from "../components/CustomFilter.vue";
 
 import { useStockStore } from "../stores/stock";
 const stockStore = useStockStore();
+const router = useRouter();
 
 const gridApi = ref(null);
 
@@ -66,13 +67,6 @@ const onGridReady = (params) => {
   state.rowData = DbData.posts;
 };
 
-const onSaveColumns = async () => {
-  const newFilterList = stockStore.getFieldNameList.map((item) => ({
-    ...item,
-    isCheck: state.editColumnList.includes(item.field),
-  }));
-  stockStore.onSortField(newFilterList);
-};
 const onFilter = (filterText) => {
   state.rowData = DbData.posts.filter((row) => {
     return Object.values(row).some((value) => {
@@ -113,7 +107,9 @@ const getFilterModel = () => {
               ></InputText>
             </div>
             <div class="flex justify-end gap-3">
-              <Button outlined>Edit Columns</Button>
+              <Button outlined @click="router.push('/about')"
+                >Edit Columns</Button
+              >
               <Button outlined @click="getFilterModel">Edidft Columns</Button>
             </div>
           </div>
@@ -133,38 +129,6 @@ const getFilterModel = () => {
               :paginationPageSizeSelector="[10, 20, 50, 100]"
             >
             </ag-grid-vue>
-          </div>
-        </template>
-      </Card>
-    </div>
-    <div>
-      <Card>
-        <template #title>
-          <div class="px-6 pt-6">
-            <h1 class="text-4xl font-medium mb-5">Select Columns</h1>
-          </div>
-          <Divider
-        /></template>
-        <template #content>
-          <div class="flex justify-between mb-3 px-6">
-            <div
-              v-for="(item, index) in state.columnList"
-              :key="index"
-              class="flex align-items-center"
-            >
-              <Checkbox
-                v-model="state.editColumnList"
-                :inputId="item.field"
-                variant="outlined"
-                name="category"
-                :value="item.field"
-              />
-              <label :for="item.field">{{ item.headerName }}</label>
-            </div>
-            <div class="row w-screen pt-6 justify-center">
-              <Button outlined @click="onSaveColumns">Save Columns</Button>
-              <Button outlined>Cancel</Button>
-            </div>
           </div>
         </template>
       </Card>
