@@ -7,7 +7,7 @@ import App from "./App.vue";
 import MyPreset from "./mypreset/index.js";
 
 import PrimeVue from "primevue/config";
-import PrimeOne from 'primevue/themes/primeone';
+import PrimeOne from "primevue/themes/primeone";
 
 import Card from "primevue/card";
 import DataTable from "primevue/datatable";
@@ -36,17 +36,16 @@ app.component("InputText", InputText);
 app.component("DataTable", DataTable);
 app.component("ColumnGroup", ColumnGroup);
 
-
 app.use(PrimeVue, {
   theme: {
     base: PrimeOne,
     preset: MyPreset,
     options: {
-      prefix: 'p',
-      darkModeSelector: 'system',
-      cssLayer: false
-    }
-  }
+      prefix: "p",
+      darkModeSelector: "light",
+      cssLayer: false,
+    },
+  },
 });
 
 app.use(pinia);
