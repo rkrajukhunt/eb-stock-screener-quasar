@@ -1,6 +1,5 @@
 import { definePreset } from "primevue/themes";
 import { Aura } from "primevue/themes/primeone/presets/index.cjs.js";
-// import Aura from "primevue/themes/primeone/aura/index.js";
 
 const MyPreset = definePreset(Aura, {
   semantic: {
@@ -47,6 +46,11 @@ const MyPreset = definePreset(Aura, {
         },
       },
     },
+  },
+  components: {
+    // button: {
+    //   // size: "small",
+    // },
   },
 });
 

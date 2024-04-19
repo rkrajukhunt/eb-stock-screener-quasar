@@ -538,6 +538,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Company name",
         sortable: true,
         style: "min-width: 250px",
+        type: "string",
       },
       {
         colId: 2,
@@ -545,6 +546,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Stock symbol",
         // style: "min-width: 170px",
         sortable: true,
+        type: "string",
       },
       {
         colId: 14,
@@ -552,6 +554,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Price",
         // style: "min-width: 120px;",
         sortable: true,
+        type: "number",
       },
       {
         colId: 3,
@@ -559,6 +562,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Avg EOS Growth",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       // {
       //   "colId": 4,
@@ -573,6 +577,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Avg Div Growth",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       {
         colId: 6,
@@ -580,6 +585,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Payout Ratio",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       {
         colId: 7,
@@ -587,6 +593,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "LTD/EQ ratio",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       {
         colId: 8,
@@ -594,6 +601,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "AFD vs PY",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       {
         colId: 9,
@@ -601,6 +609,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Share Buyback",
         // style: "min-width: 150px",
         sortable: true,
+        type: "integer",
       },
       {
         colId: 10,
@@ -608,6 +617,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "P/E Ratio",
         // style: "min-width: 150px",
         sortable: true,
+        type: "integer",
       },
       // {
       //   "colId": 11,
@@ -622,6 +632,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "P/B Ratio Rule",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       {
         colId: 13,
@@ -629,6 +640,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Curr Div Yield",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
       {
         colId: 15,
@@ -636,6 +648,7 @@ export const useStockStore = defineStore("stock", {
         headerName: "Annual Fwd Div",
         // style: "min-width: 150px",
         sortable: true,
+        type: "number",
       },
     ],
     selectedColumns: [],
