@@ -2,7 +2,7 @@
   <div class="p-6 capitalize">
     <Card class="shadow-2xl">
       <template #title
-        >Stock Portfolio
+        >Manage Stocks
         <Divider />
       </template>
       <template #content>
@@ -17,7 +17,6 @@
               />
             </IconField>
           </div>
-          <!-- selectedItemsLabel="Edit Columns" -->
           <MultiSelect
             v-model="state.selectedColumns"
             :options="useStock.tableColumns"
@@ -25,6 +24,7 @@
             optionLabel="headerName"
             placeholder="Select Columns"
             :maxSelectedLabels="3"
+            selectedItemsLabel="{0} Column Selected"
             class="w-full md:w-20rem col-span-3"
           />
           <Dropdown

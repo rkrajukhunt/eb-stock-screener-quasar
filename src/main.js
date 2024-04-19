@@ -1,39 +1,35 @@
 import { createApp } from "vue";
 import { router } from "./router";
 import { createPinia } from "pinia";
+import App from "./App.vue";
 
 import "./style.css";
-import "primeicons/primeicons.css";
-import App from "./App.vue";
 import MyPreset from "./mypreset/index.js";
 
+import "primeicons/primeicons.css";
 import PrimeVue from "primevue/config";
 import PrimeOne from "primevue/themes/primeone";
 
-import IconField from "primevue/IconField";
-import InputIcon from "primevue/InputIcon";
-import Card from "primevue/card";
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
-import ColumnGroup from "primevue/columngroup";
 import Row from "primevue/row";
-import Dropdown from "primevue/dropdown";
-import Divider from "primevue/divider";
-import Checkbox from "primevue/checkbox";
+import Card from "primevue/card";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
+import Column from "primevue/column";
+import Divider from "primevue/divider";
+import Dropdown from "primevue/dropdown";
+import Checkbox from "primevue/checkbox";
+import DataTable from "primevue/datatable";
 import InputText from "primevue/inputtext";
+import IconField from "primevue/IconField";
+import InputIcon from "primevue/InputIcon";
 import MultiSelect from "primevue/multiselect";
 import InputNumber from "primevue/inputnumber";
 import ScrollPanel from "primevue/scrollpanel";
+import ColumnGroup from "primevue/columngroup";
 
 const pinia = createPinia();
 const app = createApp(App);
 
-app.component("ScrollPanel", ScrollPanel);
-app.component("InputNumber", InputNumber);
-app.component("InputIcon", InputIcon);
-app.component("IconField", IconField);
 app.component("Row", Row);
 app.component("Card", Card);
 app.component("Dialog", Dialog);
@@ -42,9 +38,13 @@ app.component("Column", Column);
 app.component("Divider", Divider);
 app.component("Dropdown", Dropdown);
 app.component("Checkbox ", Checkbox);
-app.component("InputText", InputText);
-app.component("MultiSelect", MultiSelect);
 app.component("DataTable", DataTable);
+app.component("InputText", InputText);
+app.component("InputIcon", InputIcon);
+app.component("IconField", IconField);
+app.component("MultiSelect", MultiSelect);
+app.component("ScrollPanel", ScrollPanel);
+app.component("InputNumber", InputNumber);
 app.component("ColumnGroup", ColumnGroup);
 app.component("FloatLabel", FloatLabel);
 app.component("IconField", IconField);
