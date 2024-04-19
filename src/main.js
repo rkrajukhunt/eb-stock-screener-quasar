@@ -1,97 +1,73 @@
 import { createApp } from "vue";
-import "./style.css";
-import AppRoot from "./App.vue";
+import { router } from "./router";
 import { createPinia } from "pinia";
-import router from "./router";
 
-import { definePreset } from "primevue/themes";
+import "./style.css";
+import "primeicons/primeicons.css";
+import App from "./App.vue";
+import MyPreset from "./mypreset/index.js";
+
 import PrimeVue from "primevue/config";
 import PrimeOne from "primevue/themes/primeone";
-import Aura from "primevue/themes/primeone/aura";
 
+import IconField from "primevue/IconField";
+import InputIcon from "primevue/InputIcon";
 import Card from "primevue/card";
-import Button from "primevue/button";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import ColumnGroup from "primevue/columngroup";
 import Row from "primevue/row";
 import Dropdown from "primevue/dropdown";
+import Divider from "primevue/divider";
+import Checkbox from "primevue/checkbox";
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import InputText from "primevue/inputtext";
+import MultiSelect from "primevue/multiselect";
+import InputNumber from "primevue/inputnumber";
+import ScrollPanel from "primevue/scrollpanel";
 
-const Noir = definePreset(Aura, {
-  semantic: {
-    primary: {
-      50: "{zinc.50}",
-      100: "{zinc.100}",
-      200: "{zinc.200}",
-      300: "{zinc.300}",
-      400: "{zinc.400}",
-      500: "{zinc.500}",
-      600: "{zinc.600}",
-      700: "{zinc.700}",
-      800: "{zinc.800}",
-      900: "{zinc.900}",
-      950: "{zinc.950}",
-    },
-    colorScheme: {
-      light: {
-        primary: {
-          color: "{zinc.950}",
-          inverseColor: "#ffffff",
-          hoverColor: "{zinc.900}",
-          activeColor: "{zinc.800}",
-        },
-        highlight: {
-          background: "{zinc.950}",
-          focusBackground: "{zinc.700}",
-          color: "#ffffff",
-          focusColor: "#ffffff",
-        },
-      },
-      dark: {
-        primary: {
-          color: "{zinc.50}",
-          inverseColor: "{zinc.950}",
-          hoverColor: "{zinc.100}",
-          activeColor: "{zinc.200}",
-        },
-        highlight: {
-          background: "rgba(250, 250, 250, .16)",
-          focusBackground: "rgba(250, 250, 250, .24)",
-          color: "rgba(255,255,255,.87)",
-          focusColor: "rgba(255,255,255,.87)",
-        },
-      },
-    },
-  },
-});
-
-const app = createApp(AppRoot);
 const pinia = createPinia();
-app.use(pinia);
-app.use(router);
+const app = createApp(App);
 
-// prime vue config
+app.component("ScrollPanel", ScrollPanel);
+app.component("InputNumber", InputNumber);
+app.component("InputIcon", InputIcon);
+app.component("IconField", IconField);
+app.component("Row", Row);
+app.component("Card", Card);
+app.component("Dialog", Dialog);
+app.component("Button", Button);
+app.component("Column", Column);
+app.component("Divider", Divider);
+app.component("Dropdown", Dropdown);
+app.component("Checkbox ", Checkbox);
+app.component("InputText", InputText);
+app.component("MultiSelect", MultiSelect);
+app.component("DataTable", DataTable);
+app.component("ColumnGroup", ColumnGroup);
+app.component("FloatLabel", FloatLabel);
+app.component("IconField", IconField);
+app.component("InputIcon", InputIcon);
+
 app.use(PrimeVue, {
-  ripple: false,
-  // Default theme configuration
   theme: {
     base: PrimeOne,
-    preset: Noir,
+    preset: MyPreset,
     options: {
       prefix: "p",
-      darkModeSelector: "system",
+      darkModeSelector: "light",
       cssLayer: false,
+    },
+    components: {
+      Button: {
+        // Adjust the size of all buttons globally
+        size: "small", // or 'large' or 'medium' as per your requirement
+      },
     },
   },
 });
 
-app.component("Card", Card);
-app.component("Button", Button);
-app.component("DataTable", DataTable);
-app.component("Column", Column);
-app.component("ColumnGroup", ColumnGroup);
-app.component("Row", Row);
-app.component("Dropdown", Dropdown);
-// prime vue config end
-
+app.use(pinia);
+app.use(router);
 app.mount("#app");

@@ -1,9 +1,24 @@
-import { createMemoryHistory, createRouter } from "vue-router";
-import routes from "./routes";
+import { createRouter, createWebHistory } from "vue-router";
 
-const router = createRouter({
-  history: createMemoryHistory(),
-  routes,
+export const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      component: () => import("../pages/HomeView.vue"),
+    },
+    {
+      path: "/dashboard",
+      component: () => import("../pages/DashboardView.vue"),
+    },
+    { path: "/about", component: () => import("../pages/AboutView.vue") },
+    {
+      path: "/edit-column",
+      component: () => import("../pages/EditColumn.vue"),
+    },
+    {
+      path: "/:catchAll(.*)*",
+      component: () => import("../pages/NotFound.vue"),
+    },
+  ],
 });
-
-export default router;
