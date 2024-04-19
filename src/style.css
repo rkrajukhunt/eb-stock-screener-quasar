@@ -10,5 +10,9 @@
 }
 
 :root {
-  --tw-ring-color: hsl(var(264 5% 64.9%));
+  /*--tw-ring-color: hsl(var(264 5% 64.9%));*/
+}
+
+body {
+  @apply bg-gray-50;
 }

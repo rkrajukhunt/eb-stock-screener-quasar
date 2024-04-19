@@ -149,29 +149,27 @@ const getFilterModel = () => {
             ></Button>
             <Button icon="pi pi-filter-slash" outlined></Button>
           </div>
-        </div>
-      </div>
-      <!-- <div class="my-3 px-6">
-
-      </div> -->
-      <div>
-        <ag-grid-vue
-          :class="state.themeClass"
-          style="width: 100%; height: 100%"
-          id="myGrid"
-          :columnDefs="state.columnDefs"
-          @grid-ready="onGridReady"
-          :rowData="state.rowData"
-          :defaultColDef="state.defaultColDef"
-          :pagination="true"
-          :paginationPageSize="10"
-          domLayout="autoHeight"
-          :paginationPageSizeSelector="[10, 20, 50, 100]"
-        >
-        </ag-grid-vue>
-      </div>
-      <!-- </template> -->
-      <!-- </Card> -->
+          <Divider />
+        </template>
+        <template #content>
+          <div class="flex justify-between mb-3 px-6">
+            <div>
+              <InputText v-model="state.search" @update:modelValue="onFilter" variant="outlined"></InputText>
+            </div>
+            <div class="flex justify-end gap-3">
+              <Button outlined @click="router.push('/about')">Edit Columns</Button>
+              <Button outlined @click="getFilterModel">Edidft Columns</Button>
+            </div>
+          </div>
+          <div>
+            <ag-grid-vue :class="state.themeClass" style="width: 100%; height: 100%" id="myGrid" ref="gridApi"
+              :columnDefs="state.columnDefs" @grid-ready="onGridReady" :rowData="state.rowData"
+              :defaultColDef="state.defaultColDef" :pagination="true" :paginationPageSize="10" domLayout="autoHeight"
+              :paginationPageSizeSelector="[10, 20, 50, 100]">
+            </ag-grid-vue>
+          </div>
+        </template>
+      </Card>
     </div>
   </div>
 </template>
