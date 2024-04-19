@@ -6,30 +6,28 @@
       </template>
       <template #content>
         <div class="px-1 grid grid-flow-row-dense grid-cols-12 gap-2">
-          <Button class="col-span-1" severity="secondary" type="button" icon="pi pi-filter-slash" label="Clear"
-            @click="clearFilter()" />
-
-          <div class="col-span-2 col-start-9">
+          <div class="col-span-3">
             <IconField iconPosition="left">
               <InputIcon class="pi pi-search" />
               <InputText v-model="state.filters['global'].value" placeholder="Global Search" class="w-full" />
             </IconField>
           </div>
+          <!-- selectedItemsLabel="Edit Columns" -->
+          <MultiSelect v-model="state.selectedColumns" :options="useStock.tableColumns" filter optionLabel="headerName"
+            placeholder="Select Columns" :maxSelectedLabels="3" class="w-full md:w-20rem col-span-3" />
+          <Dropdown v-model="state.selectedFilter" :options="[]" placeholder="Select Filter"
+            class="w-full col-span-3" />
 
-          <Button class="col-span-2 col-start-11" type="button" icon="pi pi-filter" label="Filter Builder" outlined
+          <Button class="col-span-2" type="button" icon="pi pi-filter" label="Filter Builder" outlined
             @click="onOpenFilterBuilder" />
+
+          <Button class="col-span-1" severity="secondary" type="button" icon="pi pi-filter-slash" label="Clear"
+            @click="clearFilter()" />
         </div>
 
-        <div class="px-1 pt-2 grid grid-flow-row-dense grid-cols-12 gap-2 mb-2">
+        <div class="px-1 pt-2 mb-2">
           <InputText v-model="state.filters['global'].value" placeholder="Selected query filter condition"
-            class="w-full cursor-not-allowed col-span-8" disabled v-if="true" />
-
-          <Dropdown v-model="state.selectedFilter" :options="[]" placeholder="Select Filter"
-            class="w-full col-span-2" />
-
-          <MultiSelect v-model="state.selectedColumns" :options="useStock.tableColumns" filter optionLabel="headerName"
-            placeholder="Select Columns" :maxSelectedLabels="3" class="w-full md:w-20rem col-span-2"
-            selectedItemsLabel="Edit Columns" />
+            class="w-full cursor-not-allowed" disabled />
         </div>
 
         <DataTable paginator scrollable removableSort resizableColumns reorderableColumns size="normal"
@@ -42,7 +40,7 @@
       </template>
     </Card>
 
-    <Dialog v-model:visible="visible" modal header="Advanced Filter Builder" :style="{ width: '55rem', }" maximizable>
+    <Dialog v-model:visible="visible" modal header="Advanced Filter Builder" :style="{ width: '55rem' }" maximizable>
       <InputText class="w-full col-span-4" placeholder="Enter filter name" v-model.trim="state.filterName" />
       <Divider></Divider>
 
@@ -98,32 +96,32 @@ const state = reactive({
   filterName: null,
   filterOptions: {
     string: [
-      { label: 'Starts With', value: 'STARTS_WITH' },
-      { label: 'Contains', value: 'CONTAINS' },
-      { label: 'Not Contains', value: 'NOT_CONTAINS' },
-      { label: 'Ends With', value: 'ENDS_WITH' },
-      { label: 'Equals', value: 'EQUALS' },
-      { label: 'Not Equals', value: 'NOT_EQUALS' }
+      { label: "Starts With", value: "STARTS_WITH" },
+      { label: "Contains", value: "CONTAINS" },
+      { label: "Not Contains", value: "NOT_CONTAINS" },
+      { label: "Ends With", value: "ENDS_WITH" },
+      { label: "Equals", value: "EQUALS" },
+      { label: "Not Equals", value: "NOT_EQUALS" },
     ],
     number: [
-      { label: 'Equals', value: 'EQUALS' },
-      { label: 'Not Equals', value: 'NOT_EQUALS' },
-      { label: 'Less Than', value: 'LESS_THAN' },
-      { label: 'Less Than or Equal To', value: 'LESS_THAN_OR_EQUAL_TO' },
-      { label: 'Greater Than', value: 'GREATER_THAN' },
-      { label: 'Greater Than or Equal To', value: 'GREATER_THAN_OR_EQUAL_TO' },
-      { label: 'Between', value: 'BETWEEN' },
-      { label: 'In', value: 'IN' }
+      { label: "Equals", value: "EQUALS" },
+      { label: "Not Equals", value: "NOT_EQUALS" },
+      { label: "Less Than", value: "LESS_THAN" },
+      { label: "Less Than or Equal To", value: "LESS_THAN_OR_EQUAL_TO" },
+      { label: "Greater Than", value: "GREATER_THAN" },
+      { label: "Greater Than or Equal To", value: "GREATER_THAN_OR_EQUAL_TO" },
+      { label: "Between", value: "BETWEEN" },
+      { label: "In", value: "IN" },
     ],
     date: [
-      { label: 'Date Is', value: 'DATE_IS' },
-      { label: 'Date Is Not', value: 'DATE_IS_NOT' },
-      { label: 'Date Before', value: 'DATE_BEFORE' },
-      { label: 'Date After', value: 'DATE_AFTER' }
+      { label: "Date Is", value: "DATE_IS" },
+      { label: "Date Is Not", value: "DATE_IS_NOT" },
+      { label: "Date Before", value: "DATE_BEFORE" },
+      { label: "Date After", value: "DATE_AFTER" },
     ],
   },
   filterDefinition: [],
-  selectedColumns: useStock.tableColumns,
+  selectedColumns: useStock.getDefaultColumns,
   selectedFilter: null,
 });
 
@@ -135,7 +133,7 @@ const initFilters = () => {
   state.filters = {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   };
-  state.selectedColumns = useStock.tableColumns;
+  state.selectedColumns = useStock.getDefaultColumns;
 };
 
 const clearFilter = () => {
@@ -145,43 +143,46 @@ const clearFilter = () => {
 const onFilterColumnSelectionChange = (item) => {
   item.filterMode = null;
   item.value = null;
-}
+};
 
 const resetFilterDefinition = () => {
   state.filterName = null;
-  state.filterDefinition = [{
-    value: null,
-    column: null,
-    filterMode: null,
-  }];
-}
+  state.filterDefinition = [
+    {
+      value: null,
+      column: null,
+      filterMode: null,
+    },
+  ];
+};
 
 const onOpenFilterBuilder = () => {
   resetFilterDefinition();
   visible.value = true;
-}
+};
 
 const onCancelFilterBuilder = () => {
   resetFilterDefinition();
   visible.value = false;
-}
+};
 
 const onAddFilterDefinition = () => {
   state.filterDefinition.push({
     value: null,
     column: null,
     filterMode: null,
-  })
-}
+  });
+};
 
 const onRemoveFilterDefinition = (idx) => {
   state.filterDefinition.splice(idx, 1);
-}
+};
 
 const onApplyFilter = () => {
-  visible.value = true;
-}
-
+  console.log("this is demo", state.filterDefinition);
+  console.log("this is demo", state.filterName);
+  visible.value = false;
+};
 </script>
 
 <style></style>
