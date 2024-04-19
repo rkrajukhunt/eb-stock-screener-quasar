@@ -20,8 +20,8 @@ import Dropdown from "primevue/dropdown";
 import Checkbox from "primevue/checkbox";
 import DataTable from "primevue/datatable";
 import InputText from "primevue/inputtext";
-import IconField from "primevue/IconField";
-import InputIcon from "primevue/InputIcon";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
 import MultiSelect from "primevue/multiselect";
 import InputNumber from "primevue/inputnumber";
 import ScrollPanel from "primevue/scrollpanel";
@@ -42,13 +42,11 @@ app.component("DataTable", DataTable);
 app.component("InputText", InputText);
 app.component("InputIcon", InputIcon);
 app.component("IconField", IconField);
+app.component("FloatLabel", FloatLabel);
 app.component("MultiSelect", MultiSelect);
 app.component("ScrollPanel", ScrollPanel);
 app.component("InputNumber", InputNumber);
 app.component("ColumnGroup", ColumnGroup);
-app.component("FloatLabel", FloatLabel);
-app.component("IconField", IconField);
-app.component("InputIcon", InputIcon);
 
 app.use(PrimeVue, {
   theme: {
