@@ -42,7 +42,6 @@ app.component("DataTable", DataTable);
 app.component("InputText", InputText);
 app.component("InputIcon", InputIcon);
 app.component("IconField", IconField);
-app.component("FloatLabel", FloatLabel);
 app.component("MultiSelect", MultiSelect);
 app.component("ScrollPanel", ScrollPanel);
 app.component("InputNumber", InputNumber);
