@@ -656,7 +656,9 @@ export const useStockStore = defineStore("stock", {
         default: false,
       },
     ],
+    customFilters: [],
     selectedColumns: [],
+    selectedCustomFilter: null,
   }),
   getters: {
     getStockList() {
@@ -668,6 +670,20 @@ export const useStockStore = defineStore("stock", {
     getDefaultColumns() {
       return this.tableColumns.filter((e) => e.default);
     },
+    getCustomFilterList() {
+      return this.customFilters || [];
+    },
+    getCurrentFliter() {
+      return this.selectedCustomFilter?.filter;
+    },
   },
-  actions: {},
+  actions: {
+    setCurrentCustomFilter(payload) {
+      this.selectedCustomFilter = payload;
+    },
+    saveCustomFilter(payload) {
+      this.customFilters.push(payload);
+      this.selectedCustomFilter = payload;
+    },
+  },
 });

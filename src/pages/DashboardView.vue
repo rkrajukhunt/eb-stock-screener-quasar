@@ -15,8 +15,8 @@
           <!-- selectedItemsLabel="Edit Columns" -->
           <MultiSelect v-model="state.selectedColumns" :options="useStock.tableColumns" filter optionLabel="headerName"
             placeholder="Select Columns" :maxSelectedLabels="3" class="w-full md:w-20rem col-span-3" />
-          <Dropdown v-model="state.selectedFilter" :options="[]" placeholder="Select Filter"
-            class="w-full col-span-3" />
+          <Dropdown v-model="useStock.selectedCustomFilter" :options="useStock.getCustomFilterList"
+            placeholder="Select Filter" optionLabel="name" class="w-full col-span-3" />
 
           <Button class="col-span-2" type="button" icon="pi pi-filter" label="Filter Builder" outlined
             @click="onOpenFilterBuilder" />
@@ -82,7 +82,7 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 
 import { useStockStore } from "../stores/stock.js";
@@ -129,6 +129,13 @@ onMounted(() => {
   initFilters();
 });
 
+watch(() => useStock.getCurrentFliter, val => {
+  state.filters = {
+    ...val,
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  }
+})
+
 const initFilters = () => {
   state.filters = {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -137,6 +144,7 @@ const initFilters = () => {
 };
 
 const clearFilter = () => {
+  useStock.selectedCustomFilter = null;
   initFilters();
 };
 
@@ -179,10 +187,40 @@ const onRemoveFilterDefinition = (idx) => {
 };
 
 const onApplyFilter = () => {
-  console.log("this is demo", state.filterDefinition);
-  console.log("this is demo", state.filterName);
+  const result = generateOutput(state.filterDefinition);
+  const payload = {
+    id: new Date().getTime(),
+    name: state.filterName,
+    filter: result
+  }
+  useStock.saveCustomFilter(payload);
   visible.value = false;
 };
+
+const generateOutput = (payload) => {
+  const output = {};
+
+  payload.forEach(item => {
+    const { value, column, filterMode } = item;
+
+    // Skip processing if column or filterMode is null
+    if (!column || !filterMode) {
+      return;
+    }
+
+    const { field } = column;
+    const { value: modeValue } = filterMode;
+
+    if (!output[field]) {
+      output[field] = { operator: FilterOperator.AND, constraints: [] };
+    }
+
+    output[field].constraints.push({ value, matchMode: FilterMatchMode[modeValue] });
+  });
+
+  return output;
+}
+
 </script>
 
 <style></style>
