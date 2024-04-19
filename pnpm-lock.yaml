@@ -2,7 +2,6 @@ lockfileVersion: 5.4
 
 specifiers:
   '@vitejs/plugin-vue': ^5.0.4
-  ag-grid-vue3: ^31.2.1
   autoprefixer: ^10.4.16
   pinia: ^2.1.7
   postcss: ^8.4.32
@@ -15,12 +14,11 @@ specifiers:
   vue-router: '4'
 
 dependencies:
-  ag-grid-vue3: 31.2.1
   pinia: 2.1.7_vue@3.4.23
   primeicons: 7.0.0
   primevue: 4.0.0-beta.1_vue@3.4.23
   vue: 3.4.23
-  vue-router: 4.3.1_vue@3.4.23
+  vue-router: 4.3.2_vue@3.4.23
 
 devDependencies:
   '@vitejs/plugin-vue': 5.0.4_vite@5.2.9+vue@3.4.23
@@ -571,19 +569,6 @@ packages:
     hasBin: true
     dev: true
 
-  /ag-grid-community/31.2.1:
-    resolution: {integrity: sha512-D+gnUQ4dHZ/EQJmupQnDqcEKiCEeuK5ZxlsIpdPKgHg/23dmW+aEdivtB9nLpSc2IEK0RUpchcSxeUT37Boo5A==}
-    dev: false
-
-  /ag-grid-vue3/31.2.1:
-    resolution: {integrity: sha512-Ox+tKh7Fe0mluB0k8ojpci4yMleWNx3LVZ616JqXkZXEbHfeEl2TNF3SaoCfD0k3agDv6H92eaAKT5aQXC9X+A==}
-    dependencies:
-      ag-grid-community: 31.2.1
-      vue: 3.4.23
-    transitivePeerDependencies:
-      - typescript
-    dev: false
-
   /ansi-regex/5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
@@ -666,7 +651,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001611
-      electron-to-chromium: 1.4.741
+      electron-to-chromium: 1.4.744
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13_browserslist@4.23.0
     dev: true
@@ -753,8 +738,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.741:
-    resolution: {integrity: sha512-AyTBZqDoS7/mvQK22gOQpjxbeV8iPeUBTvYlEh/1S9dKAHgQdxuF49g9rLbj0cRKtqH8PzLJzqT3nAdl+qoZTA==}
+  /electron-to-chromium/1.4.744:
+    resolution: {integrity: sha512-nAGcF0yeKKfrP13LMFr5U1eghfFSvFLg302VUFzWlcjPOnUYd52yU5x6PBYrujhNbc4jYmZFrGZFK+xasaEzVA==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1468,8 +1453,8 @@ packages:
       vue: 3.4.23
     dev: false
 
-  /vue-router/4.3.1_vue@3.4.23:
-    resolution: {integrity: sha512-D0h3oyP6vp28BOvxv2hVpiqFTjTJizCf1BuMmCibc8UW0Ll/N80SWqDd/hqPMaZfzW1j+s2s+aTRyBIP9ElzOw==}
+  /vue-router/4.3.2_vue@3.4.23:
+    resolution: {integrity: sha512-hKQJ1vDAZ5LVkKEnHhmm1f9pMiWIBNGF5AwU67PdH7TyXCj/a4hTccuUuYCAMgJK6rO/NVYtQIEN3yL8CECa7Q==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

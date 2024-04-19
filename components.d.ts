@@ -5,10 +5,10 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module 'vue' {
+declare module "vue" {
   export interface GlobalComponents {
-    Button: typeof import('primevue/button')['default']
-    Calendar: typeof import('primevue/calendar')['default']
-    Header: typeof import('./src/components/Header.vue')['default']
+    Button: typeof import("primevue/button")["default"];
+    Calendar: typeof import("primevue/calendar")["default"];
+    Header: typeof import("./src/components/Header.vue")["default"];
   }
 }

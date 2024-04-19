@@ -47,11 +47,7 @@ const MyPreset = definePreset(Aura, {
       },
     },
   },
-  components: {
-    // button: {
-    //   // size: "small",
-    // },
-  },
+  components: {},
 });
 
 export default MyPreset;
