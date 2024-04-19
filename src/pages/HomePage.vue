@@ -56,7 +56,7 @@
 
         <div class="px-1 pt-2 mb-2">
           <InputText
-            v-model="state.filters['global'].value"
+            v-model="state.filters['global'].query"
             placeholder="Selected query filter condition"
             class="w-full cursor-not-allowed"
             disabled
@@ -214,8 +214,6 @@ const state = reactive({
       { label: "Less Than or Equal To", value: "LESS_THAN_OR_EQUAL_TO" },
       { label: "Greater Than", value: "GREATER_THAN" },
       { label: "Greater Than or Equal To", value: "GREATER_THAN_OR_EQUAL_TO" },
-      { label: "Between", value: "BETWEEN" },
-      { label: "In", value: "IN" },
     ],
     date: [
       { label: "Date Is", value: "DATE_IS" },
@@ -240,6 +238,7 @@ watch(
       ...val,
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     };
+    if (val) onQueryBuilder(val);
   }
 );
 
@@ -329,6 +328,17 @@ const generateOutput = (payload) => {
   });
 
   return output;
+};
+
+const onQueryBuilder = (val) => {
+  let res = "";
+  Object.keys(val).forEach((key) => {
+    const { operator, constraints } = val[key];
+    const constraint = constraints[0];
+    const { value, matchMode } = constraint;
+    res += `[${key}] ${matchMode} "${value}" ${operator.toUpperCase()} `;
+  });
+  state.filters["global"].query = res.slice(0, -5);
 };
 </script>
 

@@ -30,9 +30,4 @@
   </header>
 </template>
 
-<script setup>
-import { defineProps } from "vue";
-const props = defineProps({
-  // Define any props if needed
-});
-</script>
+<script setup></script>

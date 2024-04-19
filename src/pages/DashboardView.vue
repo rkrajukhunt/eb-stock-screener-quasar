@@ -214,8 +214,6 @@ const state = reactive({
       { label: "Less Than or Equal To", value: "LESS_THAN_OR_EQUAL_TO" },
       { label: "Greater Than", value: "GREATER_THAN" },
       { label: "Greater Than or Equal To", value: "GREATER_THAN_OR_EQUAL_TO" },
-      { label: "Between", value: "BETWEEN" },
-      { label: "In", value: "IN" },
     ],
     date: [
       { label: "Date Is", value: "DATE_IS" },
