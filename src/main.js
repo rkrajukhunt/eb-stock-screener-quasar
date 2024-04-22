@@ -26,6 +26,7 @@ import MultiSelect from "primevue/multiselect";
 import InputNumber from "primevue/inputnumber";
 import ScrollPanel from "primevue/scrollpanel";
 import ColumnGroup from "primevue/columngroup";
+import TabMenu from "primevue/tabmenu";
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -46,6 +47,7 @@ app.component("MultiSelect", MultiSelect);
 app.component("ScrollPanel", ScrollPanel);
 app.component("InputNumber", InputNumber);
 app.component("ColumnGroup", ColumnGroup);
+app.component("TabMenu", TabMenu);
 
 app.use(PrimeVue, {
   theme: {

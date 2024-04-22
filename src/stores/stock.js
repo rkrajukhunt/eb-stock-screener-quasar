@@ -685,5 +685,10 @@ export const useStockStore = defineStore("stock", {
       this.customFilters.push(payload);
       this.selectedCustomFilter = payload;
     },
+    removeCustomFilter(payload) {
+      this.customFilters = this.customFilters.filter(
+        (obj) => obj.id !== payload.id
+      );
+    },
   },
 });

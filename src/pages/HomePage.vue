@@ -31,9 +31,30 @@
             v-model="useStock.selectedCustomFilter"
             :options="useStock.getCustomFilterList"
             placeholder="Select Filter"
-            optionLabel="name"
             class="w-full col-span-3"
-          />
+            optionLabel="name"
+          >
+            <template #value="slotProps">
+              <div v-if="slotProps.value" class="flex align-items-center">
+                <div>{{ slotProps.value.name }}</div>
+              </div>
+              <span v-else>
+                {{ slotProps.placeholder }}
+              </span>
+            </template>
+            <template #option="slotProps">
+              <div class="flex justify-between w-full">
+                <div>{{ slotProps.option.name }}</div>
+                <div class="capitalize">
+                  <i
+                    @click="onRemoveFilter(slotProps.option)"
+                    class="pi pi-trash hover:scale-105 text-red-500 mr-2"
+                    style="width: 18px"
+                  ></i>
+                </div>
+              </div>
+            </template>
+          </Dropdown>
 
           <Button
             class="col-span-2"
@@ -182,6 +203,26 @@
         <Button type="button" label="Save & Apply" @click="onApplyFilter" />
       </template>
     </Dialog>
+    <Dialog
+      v-model:visible="visibleRemoveDialog"
+      modal
+      header="Advanced Filter Remove"
+      :style="{ width: '30rem' }"
+      maximizable
+    >
+      <Divider></Divider>
+      <p class="py-3">do you want delete this filter ?</p>
+      <Divider></Divider>
+      <template #footer>
+        <Button
+          type="button"
+          label="Cancel"
+          @click="visibleRemoveDialog = false"
+          severity="secondary"
+        />
+        <Button type="button" label="Delete" @click="onRemoveSelectedFilter" />
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -193,6 +234,7 @@ import { useStockStore } from "../stores/stock.js";
 const useStock = useStockStore();
 
 const visible = ref(false);
+const visibleRemoveDialog = ref(false);
 const state = reactive({
   filters: {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -227,6 +269,7 @@ const state = reactive({
   filterDefinition: [],
   selectedColumns: useStock.getDefaultColumns,
   selectedFilter: null,
+  advancedFilterRemoveItem: {},
 });
 
 onMounted(() => {
@@ -329,6 +372,16 @@ const generateOutput = (payload) => {
   });
 
   return output;
+};
+
+const onRemoveFilter = (payload) => {
+  visibleRemoveDialog.value = true;
+  state.advancedFilterRemoveItem = payload;
+};
+const onRemoveSelectedFilter = () => {
+  useStock.removeCustomFilter(state.advancedFilterRemoveItem);
+  useStock.selectedCustomFilter = null;
+  visibleRemoveDialog.value = false;
 };
 </script>
 
