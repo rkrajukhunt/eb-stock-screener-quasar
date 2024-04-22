@@ -13,7 +13,7 @@ const globalSearch = ref(null);
 
 const pageable = reactive({
   perPage: 10,
-  rowsPerPageOptions: [5, 10, 15, 20, 50, 100],
+  rowsPerPageOptions: [10, 15, 20, 50, 100],
 });
 
 const filters = computed(() => {
@@ -61,6 +61,8 @@ const onClearFilter = () => {
       :value="stockList"
       :rows="pageable.perPage"
       :rowsPerPageOptions="pageable.rowsPerPageOptions"
+      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Stocks "
     >
       <Column
         v-for="(col, index) of currentSelectedColumns"
@@ -72,6 +74,8 @@ const onClearFilter = () => {
         class="text-sm !items-center"
       >
       </Column>
+
+      <template #empty> No stocks found. </template>
     </DataTable>
   </div>
 </template>
