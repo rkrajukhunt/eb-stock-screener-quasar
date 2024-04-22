@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    component: () => import("../pages/HomePage.vue"),
+    redirect: "/manage-stocks",
   },
   {
     path: "/manage-stocks",

@@ -56,7 +56,12 @@ const onCancel = () => {
         severity="secondary"
         @click="onCancel()"
       />
-      <Button type="button" label="Reset" severity="secondary" @click="onResetDefault()" />
+      <Button
+        type="button"
+        label="Reset"
+        severity="secondary"
+        @click="onResetDefault()"
+      />
       <Button type="button" label="Apply" @click="onApply()" />
     </div>
   </div>

@@ -18,6 +18,7 @@ const { addFilter, removeFilter } = stockStore;
 const { currentSelectedColumns, filters } = storeToRefs(stockStore);
 
 const state = reactive({
+  search: null,
   name: null,
   filters: [],
   matchModeOption: {
@@ -135,7 +136,7 @@ onMounted(() => {
     <InputText
       class="w-full col-span-4"
       placeholder="Search"
-      v-model.trim="state.name"
+      v-model.trim="state.search"
     />
     <Divider class="border"></Divider>
     <div class="h-[40vh] overflow-auto">

@@ -6,8 +6,15 @@ import { useStockStore } from "../stores/stockStore.js";
 import EditColumnDialog from "./EditColumnDialog.vue";
 import FilterBuilderDialog from "./FilterBuilderDialog.vue";
 
+const emit = defineEmits(["clear", "update:search", "update:filter"]);
+
 const stockStore = useStockStore();
 const { filters } = storeToRefs(stockStore);
+
+const props = defineProps({
+  search: String,
+  filter: Object,
+});
 
 const tabItems = ref([
   { label: "Existing filter", icon: "pi pi-pen-to-square" },
@@ -18,13 +25,15 @@ const state = reactive({
   activeTabIndex: 0,
   ediColDialog: false,
   filterDialog: false,
-  globalSearch: null,
   selectedFilterItem: null,
 });
 
 const clearFilter = () => {
-  state.globalSearch = null;
-  state.selectedFilterItem = null;
+  emit("clear");
+};
+
+const onFilterChange = (val) => {
+  emit("update:filter", val);
 };
 </script>
 
@@ -35,19 +44,22 @@ const clearFilter = () => {
         <IconField iconPosition="left">
           <InputIcon class="pi pi-search" />
           <InputText
-            v-model="state.globalSearch"
-            placeholder="Global Search"
             class="w-full"
+            placeholder="Global Search"
+            :value="props.search"
+            @input="emit('update:search', $event.target.value)"
           />
         </IconField>
       </div>
 
       <Dropdown
-        v-model="state.selectedFilterItem"
+        showClear
         :options="filters"
+        :model-value="props.filter"
         placeholder="Select Filter"
         optionLabel="name"
         class="w-full col-span-3"
+        @update:modelValue="onFilterChange"
       />
 
       <Button
@@ -74,7 +86,7 @@ const clearFilter = () => {
         type="button"
         icon="pi pi-filter-slash"
         label="Clear"
-        @click="clearFilter()"
+        @click="clearFilter"
       />
     </div>
 

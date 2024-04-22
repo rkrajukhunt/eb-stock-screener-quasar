@@ -1,7 +1,7 @@
-import {defineStore} from "pinia";
-import {computed, ref} from "vue";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
 
-export const useStockStore = defineStore('manageStock', () => {
+export const useStockStore = defineStore("manageStock", () => {
   const stockList = ref([
     {
       name: "Apple Inc.",
@@ -531,6 +531,7 @@ export const useStockStore = defineStore('manageStock', () => {
       annual_fwd_div: 3,
     },
   ]);
+
   const defaultColumnFields = ["name", "symbol", "price", "payout_ratio"];
   const columnsFieldsList = ref([
     {
@@ -664,8 +665,12 @@ export const useStockStore = defineStore('manageStock', () => {
 
   // getters
   const defaultColumns = computed(() => {
-    return columnsFieldsList.value.filter((column) => defaultColumnFields.includes(column.field)) ?? [];
-  })
+    return (
+      columnsFieldsList.value.filter((column) =>
+        defaultColumnFields.includes(column.field)
+      ) ?? []
+    );
+  });
 
   // Use computed property for currentSelectedColumns
   const currentSelectedColumns = computed(() => {
@@ -677,15 +682,25 @@ export const useStockStore = defineStore('manageStock', () => {
   // actions
   const setCurrentSelectedColumns = (columns) => {
     selectedColumns.value = columns;
-  }
+  };
 
   const addFilter = (filter) => {
     filters.value.push(filter);
-  }
+  };
 
   const removeFilter = (filterIdx) => {
     filters.value.splice(filterIdx, 1);
-  }
+  };
 
-  return { stockList, selectedColumns, columnsFieldsList, defaultColumns, currentSelectedColumns, filters,  setCurrentSelectedColumns, addFilter, removeFilter}
-})
+  return {
+    stockList,
+    filters,
+    defaultColumns,
+    selectedColumns,
+    columnsFieldsList,
+    currentSelectedColumns,
+    addFilter,
+    removeFilter,
+    setCurrentSelectedColumns,
+  };
+});

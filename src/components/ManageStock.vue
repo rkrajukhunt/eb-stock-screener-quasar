@@ -1,5 +1,4 @@
 <script setup>
-import StockFilters from "./StockFilters.vue";
 import StockDataTable from "./StockDataTable.vue";
 </script>
 
@@ -10,12 +9,9 @@ import StockDataTable from "./StockDataTable.vue";
       <Divider />
     </template>
     <template #content>
-      <stock-filters></stock-filters>
       <stock-data-table></stock-data-table>
     </template>
   </Card>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
