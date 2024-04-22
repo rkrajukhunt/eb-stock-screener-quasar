@@ -174,7 +174,7 @@ onMounted(() => {
   <template v-else>
     <InputText
       class="w-full col-span-4"
-      placeholder="Enter filter name"
+      placeholder="Enter Filter Name"
       v-model.trim="state.name"
     />
     <Divider></Divider>

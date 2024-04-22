@@ -104,6 +104,7 @@ const onFilterChange = (val) => {
       modal
       :style="{ width: '55rem' }"
       @hide="state.activeTabIndex = 0"
+      class="capitalize"
     >
       <template #header>
         <TabMenu
