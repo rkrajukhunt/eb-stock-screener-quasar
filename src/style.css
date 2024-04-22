@@ -16,3 +16,15 @@
 body {
   @apply bg-gray-100;
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #09090b;
+  border-radius: 5px;
+  cursor: n-resize;
+}
