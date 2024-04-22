@@ -131,127 +131,128 @@ onMounted(() => {
 </script>
 
 <template>
-  <div></div>
-  <template v-if="props.activeTabIndex === 0">
-    <IconField iconPosition="left">
-      <InputIcon class="pi pi-search"> </InputIcon>
+  <div>
+    <template v-if="props.activeTabIndex === 0">
+      <IconField iconPosition="left">
+        <InputIcon class="pi pi-search"> </InputIcon>
+        <InputText
+          v-model.trim="state.search"
+          class="w-full col-span-4"
+          placeholder="Search"
+        />
+      </IconField>
+      <Divider class="border"></Divider>
+      <div class="h-[40vh] overflow-auto">
+        <div v-if="filters.length === 0"></div>
+
+        <div v-else v-for="(item, idx) in filters" :key="idx" class="py-1">
+          <div
+            class="flex justify-between items-center px-3 py-2 hover:rounded-md hover:bg-[#eef1f6]"
+          >
+            <div>
+              <h2 class="text-md font-bold leading-5 text-primary capitalize">
+                {{ item.name }}
+              </h2>
+              <h3 class="text-sm text-secondary opacity-70">
+                {{ item.query }}
+              </h3>
+            </div>
+
+            <Button
+              class="w-full text-red-500"
+              type="button"
+              icon="pi pi-trash"
+              outlined
+              rounded
+              @click="removeFilter(idx)"
+            />
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
       <InputText
-        v-model.trim="state.search"
         class="w-full col-span-4"
-        placeholder="Search"
+        placeholder="Enter filter name"
+        v-model.trim="state.name"
       />
-    </IconField>
-    <Divider class="border"></Divider>
-    <div class="h-[40vh] overflow-auto">
-      <div v-if="filters.length === 0"></div>
+      <Divider></Divider>
 
-      <div v-else v-for="(item, idx) in filters" :key="idx" class="py-1">
-        <div
-          class="flex justify-between items-center px-3 py-2 hover:rounded-md hover:bg-[#eef1f6]"
-        >
-          <div>
-            <h2 class="text-md font-bold leading-5 text-primary capitalize">
-              {{ item.name }}
-            </h2>
-            <h3 class="text-sm text-secondary opacity-70">
-              {{ item.query }}
-            </h3>
-          </div>
-
-          <Button
-            class="w-full text-red-500"
-            type="button"
-            icon="pi pi-trash"
-            outlined
-            rounded
-            @click="removeFilter(idx)"
-          />
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template v-else>
-    <InputText
-      class="w-full col-span-4"
-      placeholder="Enter filter name"
-      v-model.trim="state.name"
-    />
-    <Divider></Divider>
-
-    <div class="h-[40vh] overflow-auto">
-      <div v-for="(col, idx) in state.filters" :key="idx">
-        <div class="grid grid-flow-row grid-cols-12 gap-2 box-border mb-2">
-          <Dropdown
-            v-model="col.column"
-            :options="currentSelectedColumns"
-            optionLabel="headerName"
-            filter
-            placeholder="Select a column"
-            class="w-full col-span-4"
-          />
-
-          <Dropdown
-            v-if="col.column"
-            v-model="col.matchMode"
-            :options="state.matchModeOption[col.column.type]"
-            optionLabel="label"
-            placeholder="Select a column"
-            class="w-full col-span-3"
-          />
-
-          <InputText
-            v-model="col.value"
-            v-if="col.matchMode && col.column?.type === 'string'"
-            class="w-full col-span-3"
-            placeholder="Enter value"
-          />
-
-          <InputNumber
-            v-model="col.value"
-            v-if="col.matchMode && col.column?.type === 'number'"
-            class="w-full col-span-3"
-            placeholder="Enter value"
-            inputId="withoutgrouping"
-            :useGrouping="false"
-          />
-
-          <div class="col-span-2 col-start-11 flex justify-end gap-1">
-            <Button
-              class="p-button-sm col-span-1 w-full"
-              type="button"
-              icon="pi pi-plus"
-              outlined
-              rounded
-              @click="onAddCol"
+      <div class="h-[40vh] overflow-auto">
+        <div v-for="(col, idx) in state.filters" :key="idx">
+          <div class="grid grid-flow-row grid-cols-12 gap-2 box-border mb-2">
+            <Dropdown
+              v-model="col.column"
+              :options="currentSelectedColumns"
+              optionLabel="headerName"
+              filter
+              placeholder="Select a column"
+              class="w-full col-span-4"
             />
-            <Button
-              class="p-button-sm col-span-1 w-full"
-              type="button"
-              icon="pi pi-minus"
-              outlined
-              rounded
-              :disabled="state.filters.length === 1"
-              @click="onRemoveCol(idx)"
+
+            <Dropdown
+              v-if="col.column"
+              v-model="col.matchMode"
+              :options="state.matchModeOption[col.column.type]"
+              optionLabel="label"
+              placeholder="Select a column"
+              class="w-full col-span-3"
             />
+
+            <InputText
+              v-model="col.value"
+              v-if="col.matchMode && col.column?.type === 'string'"
+              class="w-full col-span-3"
+              placeholder="Enter value"
+            />
+
+            <InputNumber
+              v-model="col.value"
+              v-if="col.matchMode && col.column?.type === 'number'"
+              class="w-full col-span-3"
+              placeholder="Enter value"
+              inputId="withoutgrouping"
+              :useGrouping="false"
+            />
+
+            <div class="col-span-2 col-start-11 flex justify-end gap-1">
+              <Button
+                class="p-button-sm col-span-1 w-full"
+                type="button"
+                icon="pi pi-plus"
+                outlined
+                rounded
+                @click="onAddCol"
+              />
+              <Button
+                class="p-button-sm col-span-1 w-full"
+                type="button"
+                icon="pi pi-minus"
+                outlined
+                rounded
+                :disabled="state.filters.length === 1"
+                @click="onRemoveCol(idx)"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </template>
+    </template>
 
-  <div class="flex justify-end gap-2 mt-4">
-    <Button
-      type="button"
-      :label="props.activeTabIndex === 0 ? 'Close' : 'Cancel'"
-      @click="onCancel"
-      severity="secondary"
-    />
-    <Button
-      type="button"
-      label="Apply"
-      @click="onApply"
-      :disabled="props.activeTabIndex === 0 || !state.name"
-    />
+    <div class="flex justify-end gap-2 mt-4">
+      <Button
+        type="button"
+        :label="props.activeTabIndex === 0 ? 'Close' : 'Cancel'"
+        @click="onCancel"
+        severity="secondary"
+      />
+      <Button
+        type="button"
+        label="Apply"
+        @click="onApply"
+        :disabled="props.activeTabIndex === 0 || !state.name"
+      />
+    </div>
   </div>
 </template>
