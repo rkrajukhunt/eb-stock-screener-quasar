@@ -40,7 +40,7 @@ const onClearFilter = () => {
 </script>
 
 <template>
-  <div>
+  <div class="capitalize">
     <stock-filters
       @clear="onClearFilter"
       v-model:filter="selectedFilter"

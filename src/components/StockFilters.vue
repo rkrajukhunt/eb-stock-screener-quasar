@@ -38,7 +38,7 @@ const onFilterChange = (val) => {
 </script>
 
 <template>
-  <div>
+  <div class="capitalize">
     <div class="px-1 grid grid-flow-row-dense grid-cols-12 gap-2">
       <div class="col-span-3">
         <IconField iconPosition="left">
@@ -92,7 +92,7 @@ const onFilterChange = (val) => {
 
     <div class="px-1 pt-2 mb-2">
       <InputText
-        :value="state.selectedFilterItem?.query"
+        :value="props.filter?.query"
         placeholder="Query"
         class="w-full cursor-not-allowed"
         disabled

@@ -133,11 +133,14 @@ onMounted(() => {
 <template>
   <div></div>
   <template v-if="props.activeTabIndex === 0">
-    <InputText
-      class="w-full col-span-4"
-      placeholder="Search"
-      v-model.trim="state.search"
-    />
+    <IconField iconPosition="left">
+      <InputIcon class="pi pi-search"> </InputIcon>
+      <InputText
+        v-model.trim="state.search"
+        class="w-full col-span-4"
+        placeholder="Search"
+      />
+    </IconField>
     <Divider class="border"></Divider>
     <div class="h-[40vh] overflow-auto">
       <div v-if="filters.length === 0"></div>
@@ -160,6 +163,7 @@ onMounted(() => {
             type="button"
             icon="pi pi-trash"
             outlined
+            rounded
             @click="removeFilter(idx)"
           />
         </div>
