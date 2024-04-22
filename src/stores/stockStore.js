@@ -537,7 +537,7 @@ export const useStockStore = defineStore("manageStock", () => {
     {
       colId: 1,
       field: "name",
-      headerName: "Company name",
+      headerName: "Company Name",
       sortable: true,
       style: "min-width: 250px",
       type: "string",
@@ -546,7 +546,7 @@ export const useStockStore = defineStore("manageStock", () => {
     {
       colId: 2,
       field: "symbol",
-      headerName: "Stock symbol",
+      headerName: "Stock Symbol",
       sortable: true,
       type: "string",
       default: true,
@@ -595,7 +595,7 @@ export const useStockStore = defineStore("manageStock", () => {
     {
       colId: 7,
       field: "lt_debt_eq_ratio",
-      headerName: "LTD/EQ ratio",
+      headerName: "LTD/EQ Ratio",
       sortable: true,
       type: "number",
       default: true,
