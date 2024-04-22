@@ -161,7 +161,7 @@
                 icon="pi pi-minus"
                 outlined
                 rounded
-                :disabled="state.filterDefinition.length == 1"
+                :disabled="state.filterDefinition.length === 1"
                 @click="onRemoveFilterDefinition(idx)"
               />
             </div>
@@ -294,7 +294,7 @@ const onRemoveFilterDefinition = (idx) => {
 };
 
 const onApplyFilter = () => {
-  const result = generateOutput(state.filterDefinition);
+  const result = generateFilterCondition(state.filterDefinition);
   const payload = {
     id: new Date().getTime(),
     name: state.filterName,
@@ -304,19 +304,19 @@ const onApplyFilter = () => {
   visible.value = false;
 };
 
-const generateOutput = (payload) => {
+const generateFilterCondition = (payload) => {
   const output = {};
 
   payload.forEach((item) => {
-    const { value, column, filterMode } = item;
+    const { value, column, matchMode } = item;
 
     // Skip processing if column or filterMode is null
-    if (!column || !filterMode) {
+    if (!column || !matchMode) {
       return;
     }
 
     const { field } = column;
-    const { value: modeValue } = filterMode;
+    const { value: modeValue } = matchMode;
 
     if (!output[field]) {
       output[field] = { operator: FilterOperator.AND, constraints: [] };
@@ -331,16 +331,7 @@ const generateOutput = (payload) => {
   return output;
 };
 
-const onQueryBuilder = (val) => {
-  let res = "";
-  Object.keys(val).forEach((key) => {
-    const { operator, constraints } = val[key];
-    const constraint = constraints[0];
-    const { value, matchMode } = constraint;
-    res += `[${key}] ${matchMode} "${value}" ${operator.toUpperCase()} `;
-  });
-  state.currentFilterCondition = res.slice(0, -5);
-};
+
 </script>
 
 <style></style>
