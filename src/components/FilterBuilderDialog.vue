@@ -108,16 +108,28 @@ const generateFilter = (payload) => {
 };
 
 const generateQuery = (filter) => {
-  return Object.keys(filter)
-    .map((key) => {
-      const {
-        operator,
-        constraints: [{ value, matchMode }],
-      } = filter[key];
-      return `[${key}] ${matchMode} "${value}" ${operator.toUpperCase()}`;
-    })
-    .join(" ");
+  try {
+    let res = "";
+    Object.keys(filter).forEach((key, keyIndex) => {
+      const { constraints } = filter[key];
+      constraints.forEach((constraint, index) => {
+        const { value, matchMode, operator } = constraint;
+        if (index === constraints.length - 1) {
+          res += `[${key}] ${matchMode} "${value}"`;
+        } else {
+          res += `[${key}] ${matchMode} "${value}" ${'AND'} `;
+        }
+      });
+      if (keyIndex !== Object.keys(filter).length - 1) {
+        res += " AND ";
+      }
+    });
+    return res;
+  } catch (e) {
+    return null;
+  }
 };
+
 
 const onResetDefault = () => {
   state.name = null;
