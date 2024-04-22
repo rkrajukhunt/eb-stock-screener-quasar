@@ -10,8 +10,8 @@ const stockStore = useStockStore();
 const { filters } = storeToRefs(stockStore);
 
 const tabItems = ref([
-  { label: "Existing filter" },
-  { label: "Create new filter" },
+  { label: "Existing filter", icon: "pi pi-pen-to-square" },
+  { label: "Create new filter", icon: "pi pi-file-plus" },
 ]);
 
 const state = reactive({
