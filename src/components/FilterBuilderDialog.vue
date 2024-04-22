@@ -18,6 +18,7 @@ const { addFilter, removeFilter } = stockStore;
 const { currentSelectedColumns, filters } = storeToRefs(stockStore);
 
 const state = reactive({
+  search: null,
   name: null,
   filters: [],
   matchModeOption: {
@@ -130,20 +131,16 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-
-  </div>
+  <div></div>
   <template v-if="props.activeTabIndex === 0">
     <InputText
       class="w-full col-span-4"
       placeholder="Search"
-      v-model.trim="state.name"
+      v-model.trim="state.search"
     />
     <Divider></Divider>
     <div class="h-[40vh] overflow-auto">
-      <div v-if="filters.length === 0">
-
-      </div>
+      <div v-if="filters.length === 0"></div>
 
       <div
         v-else
@@ -173,65 +170,65 @@ onMounted(() => {
     />
     <Divider></Divider>
 
-      <div class="h-[40vh] overflow-auto">
-        <div v-for="(col, idx) in state.filters" :key="idx">
-          <div class="grid grid-flow-row grid-cols-12 gap-2 box-border mb-2">
-            <Dropdown
-              v-model="col.column"
-              :options="currentSelectedColumns"
-              optionLabel="headerName"
-              filter
-              placeholder="Select a column"
-              class="w-full col-span-4"
-            />
+    <div class="h-[40vh] overflow-auto">
+      <div v-for="(col, idx) in state.filters" :key="idx">
+        <div class="grid grid-flow-row grid-cols-12 gap-2 box-border mb-2">
+          <Dropdown
+            v-model="col.column"
+            :options="currentSelectedColumns"
+            optionLabel="headerName"
+            filter
+            placeholder="Select a column"
+            class="w-full col-span-4"
+          />
 
-            <Dropdown
-              v-if="col.column"
-              v-model="col.matchMode"
-              :options="state.matchModeOption[col.column.type]"
-              optionLabel="label"
-              placeholder="Select a column"
-              class="w-full col-span-3"
-            />
+          <Dropdown
+            v-if="col.column"
+            v-model="col.matchMode"
+            :options="state.matchModeOption[col.column.type]"
+            optionLabel="label"
+            placeholder="Select a column"
+            class="w-full col-span-3"
+          />
 
-            <InputText
-              v-model="col.value"
-              v-if="col.matchMode && col.column?.type === 'string'"
-              class="w-full col-span-3"
-              placeholder="Enter value"
-            />
+          <InputText
+            v-model="col.value"
+            v-if="col.matchMode && col.column?.type === 'string'"
+            class="w-full col-span-3"
+            placeholder="Enter value"
+          />
 
-            <InputNumber
-              v-model="col.value"
-              v-if="col.matchMode && col.column?.type === 'number'"
-              class="w-full col-span-3"
-              placeholder="Enter value"
-              inputId="withoutgrouping"
-              :useGrouping="false"
-            />
+          <InputNumber
+            v-model="col.value"
+            v-if="col.matchMode && col.column?.type === 'number'"
+            class="w-full col-span-3"
+            placeholder="Enter value"
+            inputId="withoutgrouping"
+            :useGrouping="false"
+          />
 
-            <div class="col-span-2 col-start-11 flex justify-end gap-1">
-              <Button
-                class="p-button-sm col-span-1 w-full"
-                type="button"
-                icon="pi pi-plus"
-                outlined
-                rounded
-                @click="onAddCol"
-              />
-              <Button
-                class="p-button-sm col-span-1 w-full"
-                type="button"
-                icon="pi pi-minus"
-                outlined
-                rounded
-                :disabled="state.filters.length === 1"
-                @click="onRemoveCol(idx)"
-              />
-            </div>
+          <div class="col-span-2 col-start-11 flex justify-end gap-1">
+            <Button
+              class="p-button-sm col-span-1 w-full"
+              type="button"
+              icon="pi pi-plus"
+              outlined
+              rounded
+              @click="onAddCol"
+            />
+            <Button
+              class="p-button-sm col-span-1 w-full"
+              type="button"
+              icon="pi pi-minus"
+              outlined
+              rounded
+              :disabled="state.filters.length === 1"
+              @click="onRemoveCol(idx)"
+            />
           </div>
         </div>
       </div>
+    </div>
   </template>
 
   <div class="flex justify-end gap-2 mt-4">
