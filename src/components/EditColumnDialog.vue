@@ -49,15 +49,15 @@ const onCancel = () => {
       />
     </div>
 
-    <div class="flex justify-center gap-2 mt-4">
+    <div class="flex justify-end gap-2 mt-4">
       <Button
         type="button"
         label="Cancel"
         severity="secondary"
         @click="onCancel()"
       />
+      <Button type="button" label="Reset" severity="secondary" @click="onResetDefault()" />
       <Button type="button" label="Apply" @click="onApply()" />
-      <Button type="button" label="Reset Default" @click="onResetDefault()" />
     </div>
   </div>
 </template>
